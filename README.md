@@ -1,5 +1,5 @@
-![DEMO](https://i.imgur.com/WtaYBkJ.gif)
-
+![DEMO GUI](https://i.imgur.com/WtaYBkJ.gif)
+![DEMO WEB](https://i.imgur.com/wUhgaK8.gif)
 # GUI Todo Application
 
 This repository contains a Python script for a GUI Todo application.
@@ -73,4 +73,35 @@ When the "Complete" button is clicked, the application performs the following st
 When a todo is selected from the list, the application updates the input box with the content of the selected todo.
 
 At the end of the script, the window is closed with `window.close()`.
+
+
+# Web Todo Application
+
+This repository also contains a Python script for a Web Todo application using Streamlit.
+
+## Usage
+
+This web application allows you to manage your todos. You can add and complete tasks. To add a task, enter the task in the text input box and press enter. To complete a task, check the checkbox next to the task.
+
+## Code Explanation
+
+This Python script uses the Streamlit library to create a web interface for a Todo application. The script handles different events triggered by user interactions with the web interface.
+
+### Add Event
+
+When a new todo is entered in the text input box, the application performs the following steps:
+
+1. Retrieves the new todo entered by the user.
+2. Appends the new todo to the list.
+3. Writes the updated list back to the file.
+
+### Complete Event
+
+When the checkbox next to a todo is checked, the application performs the following steps:
+
+1. Removes the selected todo from the list.
+2. Writes the updated list back to the file.
+3. Reruns the app to update the display.
+
+At the end of the script, the application continuously waits for user input with `st.rerun()`.
 
