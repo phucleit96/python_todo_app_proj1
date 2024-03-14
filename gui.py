@@ -1,6 +1,11 @@
 import functions
 import PySimpleGUI as gui
 import time
+import os
+
+if not os.path.exists("todos.txt"):
+    with open('todos.txt', 'w') as file:
+        pass
 
 gui.theme("LightBlue")
 image = gui.Image('fulllogo.png', subsample=9, zoom=2)
@@ -19,10 +24,10 @@ col2 = gui.Column([[label, add_button, edit_button, complete_button, exit_button
 
 layout = [[col1, col2]]
 
-window = gui.Window('Todo App',
+window = gui.Window('                                                                                                                   Todo App',
                     layout=layout,
                     margins=(60, 40),
-                    font=('Helvetica', 12))
+                    font=('Helvetica', 20, 'bold'))
 while True:
     event, values = window.read(timeout=10)
     if event in (gui.WINDOW_CLOSED, 'Exit'):  # add this line
@@ -60,7 +65,5 @@ while True:
                 gui.popup('Please select an item first!', font=('Helvetica', 17))
         case 'todos':
             window['todo'].update(value=values['todos'][0])
-        case 'Exit':
-            break
 
 window.close()
