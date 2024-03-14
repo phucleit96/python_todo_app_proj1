@@ -5,7 +5,7 @@ import time
 gui.theme("LightBrown9")
 image = gui.Image('fulllogo.png', subsample=7, zoom=2)
 
-clock = gui.Text('', key='clock')
+clock = gui.Text('', key='clock', font=('Helvetica', 12, 'bold'))
 label = gui.Text('Enter a new todo')
 input_box = gui.InputText(tooltip="Enter a new todo", key="todo")
 add_button = gui.Button('Add', tooltip="Add todo")
@@ -21,10 +21,12 @@ layout = [[clock, image],
           [exit_button]]
 window = gui.Window('Todo App',
                     layout=layout,
-                    margins=(100, 70),
-                    font=('Helvetica', 17))
+                    margins=(60, 40),
+                    font=('Helvetica', 12))
 while True:
     event, values = window.read(timeout=10)
+    if event in (gui.WINDOW_CLOSED, 'Exit'):  # add this line
+        break  # add this line
     window['clock'].update(value=time.strftime("%b %d, %Y %H:%M:%S"))
     match event:
         case "Add":
@@ -60,8 +62,5 @@ while True:
             window['todo'].update(value=values['todos'][0])
         case 'Exit':
             break
-        case gui.WIN_CLOSED:
-            break
-
 
 window.close()
