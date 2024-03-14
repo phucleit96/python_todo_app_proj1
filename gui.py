@@ -1,15 +1,15 @@
+# Import necessary modules
 import functions
 import PySimpleGUI as gui
 import time
-import os
 
-if not os.path.exists("todos.txt"):
-    with open('todos.txt', 'w') as file:
-        pass
-
+# Set the theme for the GUI
 gui.theme("LightBlue")
+
+# Create an image element
 image = gui.Image('fulllogo.png', subsample=9, zoom=2)
 
+# Create GUI elements
 clock = gui.Text('', key='clock', font=('Helvetica', 12, 'bold'))
 label = gui.Text('Enter a new todo', font=('Helvetica', 12, 'bold'))
 input_box = gui.InputText(tooltip="Enter a new todo", key="todo", size=(41, 1))
@@ -19,29 +19,31 @@ edit_button = gui.Button('Edit', tooltip="Edit todo")
 complete_button = gui.Button('Complete', tooltip="Finish a task")
 exit_button = gui.Button('Exit', button_color=('white', 'red'))
 
+# Create columns for the layout
 col1 = gui.Column([[clock],[image]])
 col2 = gui.Column([[label, add_button, edit_button, complete_button, exit_button], [input_box], [list_box]])
 
+# Define the layout
 layout = [[col1, col2]]
 
-window = gui.Window('                                                                                                                   Todo App',
-                    layout=layout,
-                    margins=(60, 40),
-                    font=('Helvetica', 20, 'bold'))
+# Create the window
+window = gui.Window('Todo App', layout=layout, margins=(60, 40), font=('Helvetica', 12))
+
+# Event loop
 while True:
     event, values = window.read(timeout=10)
-    if event in (gui.WINDOW_CLOSED, 'Exit'):  # add this line
-        break  # add this line
-    window['clock'].update(value=time.strftime("%b %d, %Y %H:%M:%S"))
+    if event in (gui.WINDOW_CLOSED, 'Exit'):  # If the window is closed or the Exit button is clicked
+        break  # Exit the loop
+    window['clock'].update(value=time.strftime("%b %d, %Y %H:%M:%S"))  # Update the clock
     match event:
-        case "Add":
+        case "Add":  # If the Add button is clicked
             todos = functions.get_todos()
             new_todo = values['todo'] + '\n'
             todos.append(new_todo)
             functions.write_todos(todos)
             window['todos'].update(values=todos)
             window['todo'].update(value="")
-        case "Edit":
+        case "Edit":  # If the Edit button is clicked
             try:
                 todo_to_edit = values['todos'][0]
                 new_todo = values['todo']
@@ -51,9 +53,9 @@ while True:
                 todos[index] = new_todo + '\n'
                 functions.write_todos(todos)
                 window['todos'].update(values=todos)
-            except IndexError:
+            except IndexError:  # If no todo is selected
                 gui.popup('Please select an item first!', font=('Helvetica', 17))
-        case 'Complete':
+        case 'Complete':  # If the Complete button is clicked
             try:
                 todo_to_complete = values['todos'][0]
                 todos = functions.get_todos()
@@ -61,9 +63,10 @@ while True:
                 functions.write_todos(todos)
                 window['todos'].update(values=todos)
                 window['todo'].update(value="")
-            except IndexError:
+            except IndexError:  # If no todo is selected
                 gui.popup('Please select an item first!', font=('Helvetica', 17))
-        case 'todos':
+        case 'todos':  # If a todo is selected
             window['todo'].update(value=values['todos'][0])
 
+# Close the window
 window.close()

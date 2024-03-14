@@ -1,9 +1,8 @@
 Study Python Everyday
-Data Structure and Algorithms
-Clean The Code Snippet
 Cooking and Eating
 Blogging
-Writing Blog
-Learn Web Development
-Finish Day 2 App Code
+Making 2 pizza
+Making food
+Study Python Day 1
+Learn playing piano
 
