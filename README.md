@@ -1,5 +1,8 @@
 ![DEMO GUI](https://i.imgur.com/WtaYBkJ.gif)
 ![DEMO WEB](https://i.imgur.com/wUhgaK8.gif)
+
+Live [Demo](https://phucleit96-cloud-to-do-web-aludv7.streamlit.app/)
+
 # GUI Todo Application
 
 This repository contains a Python script for a GUI Todo application.
